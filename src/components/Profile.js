@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "./Button";
 
-const Profile = ({ person }) => {
+const Profile = ({ person, selectedFriend, onSelection }) => {
+  const isSelected = person.id === selectedFriend?.id;
   return (
-    <li className="profile">
+    <li className={`profile ${isSelected ? "selected" : ""}`}>
       <img src={person.img} alt="pro-pic" />
       <div className="info">
         <h3 className="name">{person.name}</h3>
@@ -21,7 +22,9 @@ const Profile = ({ person }) => {
           {person.balance === 0 && <p>You and {person.name} are even</p>}
         </div>
       </div>
-      <Button handleClick={() => {}}>Select</Button>
+      <Button handleClick={() => onSelection(person)}>
+        {isSelected ? "Deselect" : "Select"}
+      </Button>
     </li>
   );
 };

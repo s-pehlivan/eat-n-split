@@ -4,16 +4,27 @@ import CalculationPanel from "./components/CalculationPanel";
 
 const App = () => {
   const [friends, setFriends] = useState([]);
-  const [selected, setSelected] = useState();
-
-  const [bill, setBill] = useState("");
-  const [yourShare, setYourShare] = useState("");
-  const [friendShare, setFriendShare] = useState("");
-
-  const [personPaying, setPersonPaying] = useState("you");
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
 
   function handleAddFriend(friend) {
     setFriends((friends) => [...friends, friend]);
+  }
+
+  function handleSelection(friend) {
+    setSelected((curr) => (curr?.id === friend.id ? null : friend));
+    setIsAddOpen(false);
+  }
+
+  function handleSplitBill(value) {
+    setFriends((friends) =>
+      friends.map((friend) =>
+        friend.id === selected.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+    setSelected(null);
   }
 
   return (
@@ -21,21 +32,23 @@ const App = () => {
       <div className="profile-panel">
         <ProfilePanel
           friends={friends}
+          selectedFriend={selected}
+          isAddOpen={isAddOpen}
+          setIsAddOpen={setIsAddOpen}
           onAddFriend={handleAddFriend}
-          selected={selected}
-          setSelected={setSelected}
+          onSelection={handleSelection}
         />
       </div>
-
-      <CalculationPanel
-        bill={bill}
-        setBill={setBill}
-        yourShare={yourShare}
-        setYourShare={setYourShare}
-        friendShare={friendShare}
-        setFriendShare={setFriendShare}
-        person={selected}
-      />
+      <div
+        className={`calculation-panel ${selected === null && "hidden-panel"}`}
+      >
+        {selected !== null && (
+          <CalculationPanel
+            selectedFriend={selected.name}
+            handleSplitBill={handleSplitBill}
+          />
+        )}
+      </div>
     </div>
   );
 };

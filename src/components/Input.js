@@ -3,7 +3,7 @@ import React from "react";
 const Input = ({ value, setValue, emoji, text, disabled = false }) => {
   const uniqueId = Date.now();
   return (
-    <form className="input-group">
+    <div className="input-group">
       <label htmlFor={uniqueId}>
         {emoji} {text}
       </label>
@@ -14,7 +14,7 @@ const Input = ({ value, setValue, emoji, text, disabled = false }) => {
         onChange={(e) => setValue(e.target.value)}
         disabled={disabled}
       />
-    </form>
+    </div>
   );
 };
 

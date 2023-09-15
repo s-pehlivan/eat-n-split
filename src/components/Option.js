@@ -1,9 +1,9 @@
 import React from "react";
 
-const Option = ({ value, setValue, person, emoji, text }) => {
-  const uniqueId = Date.now();
+const Option = ({ emoji, text, value, setValue, selectedFriend }) => {
+  const uniqueId = crypto.randomUUID();
   return (
-    <form className="input-group">
+    <div className="input-group">
       <label htmlFor={uniqueId}>
         {emoji} {text}
       </label>
@@ -12,10 +12,10 @@ const Option = ({ value, setValue, person, emoji, text }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       >
-        <option value="You">You</option>
-        <option value={person}>{person || "friend"}</option>
+        <option value="user">You</option>
+        <option value="friend">{selectedFriend}</option>
       </select>
-    </form>
+    </div>
   );
 };
 

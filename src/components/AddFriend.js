@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-const AddFriend = ({ onAddFriend }) => {
+const AddFriend = ({ setIsOpen, onAddFriend }) => {
   const [friend, setFriend] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState("https://i.pravatar.cc/48");
   return (
     <div className="add-friend">
       <div className="friend-form">
@@ -17,16 +17,18 @@ const AddFriend = ({ onAddFriend }) => {
         <Input value={img} setValue={setImg} emoji="🌄" text="Image URL" />
         <Button
           handleClick={() => {
-            friend !== "" && img !== ""
-              ? onAddFriend({
-                  id: `${friend + img + Math.random()}`,
-                  name: friend,
-                  img: img,
-                  balance: -5,
-                })
-              : alert("Please enter a name");
-            friend !== "" && setFriend("");
-            img !== "" && setImg("");
+            if (friend === "" || img === "") return;
+            const id = crypto.randomUUID();
+            const newFriend = {
+              id: id,
+              name: friend,
+              img: `${img}?=${id}`,
+              balance: 0,
+            };
+            onAddFriend(newFriend);
+            setFriend("");
+            setImg("https://i.pravatar.cc/48");
+            setIsOpen((s) => !s);
           }}
         >
           Add

@@ -47,6 +47,10 @@ body {
   flex-direction: column;
 }
 
+.profile-panel > button:last-child {
+  margin-top: 1rem;
+}
+
 .calculation-panel {
   background-color: var(--color-background);
   border-radius: var(--border-radius);
@@ -54,6 +58,10 @@ body {
 
 .calculation-panel > *:not(:last-child) {
   margin-bottom: var(--margin);
+}
+
+.calculation-panel.hidden-panel {
+  background-color: transparent;
 }
 
 /* Profile */
@@ -68,6 +76,14 @@ body {
   width: 100%;
   padding: 1rem;
   border-radius: var(--border-radius);
+}
+
+.profile.selected {
+  background-color: var(--color-background);
+}
+
+.profile-list li {
+  margin-bottom: 0.5rem;
 }
 
 .profile:hover {
@@ -137,10 +153,12 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 0;
 }
 
 .profile-panel > button:last-child {
   margin-left: auto;
+  margin-right: 1rem;
 }
 
 .friend-form {
@@ -161,14 +179,7 @@ select {
     margin: 2rem auto;
   }
 
-  .add-friend {
-    padding: 1rem;
-  }
-
   .profile-panel {
     padding: 0;
-  }
-  .profile-panel > button:last-child {
-    margin-right: 1rem;
   }
 }
