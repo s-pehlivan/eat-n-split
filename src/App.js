@@ -46,6 +46,7 @@ const App = () => {
           <CalculationPanel
             selectedFriend={selected.name}
             handleSplitBill={handleSplitBill}
+            key={selected.id}
           />
         )}
       </div>
