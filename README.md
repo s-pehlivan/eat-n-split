@@ -1,4 +1,4 @@
-# Travel List
+# Eat N' Split
 > A simple React application to split the bill with friends.
 
 
